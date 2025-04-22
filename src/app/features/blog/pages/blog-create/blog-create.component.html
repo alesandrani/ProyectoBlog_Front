@@ -1,0 +1,47 @@
+<div class="blog-form-container bg-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto mt-8">
+  <h1 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Crear Nuevo Blog</h1>
+  
+  <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+    
+    <!-- Título -->
+    <div class="form-group mb-6">
+      <label for="title" class="text-lg font-medium text-gray-700">Título</label>
+      <input id="title" type="text" formControlName="title" class="form-input mt-2 p-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      <div *ngIf="blogForm.get('title')?.invalid && blogForm.get('title')?.touched" class="error-message mt-2 text-red-500">
+        El título es requerido
+      </div>
+    </div>
+
+    <!-- Contenido -->
+    <div class="form-group mb-6">
+      <label for="content" class="text-lg font-medium text-gray-700">Contenido</label>
+      <textarea id="content" formControlName="content" rows="8" class="form-input mt-2 p-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+      <div *ngIf="blogForm.get('content')?.invalid && blogForm.get('content')?.touched" class="error-message mt-2 text-red-500">
+        El contenido es requerido
+      </div>
+    </div>
+
+    <!-- Etiquetas -->
+    <div class="form-group mb-6">
+      <label for="tags" class="text-lg font-medium text-gray-700">Etiquetas (separadas por comas)</label>
+      <input id="tags" type="text" formControlName="tags" class="form-input mt-2 p-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      <div class="help-text mt-2 text-sm text-gray-500">Ejemplo: tecnología, programación, angular</div>
+    </div>
+
+    <!-- Imagen URL -->
+    <div class="form-group mb-6">
+      <label for="imageUrl" class="text-lg font-medium text-gray-700">URL de la imagen (opcional)</label>
+      <input id="imageUrl" type="url" formControlName="imageUrl" class="form-input mt-2 p-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <!-- Acciones -->
+    <div class="form-actions flex justify-between items-center mt-6">
+      <button type="button" routerLink="/blog" class="btn btn-secondary px-6 py-3 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors">
+        Cancelar
+      </button>
+      <button type="submit" class="btn btn-primary px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors" [disabled]="blogForm.invalid">
+        Crear Blog
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,29 @@
+<div class="blog-card">
+  <div class="card-header">
+    <h2 class="title">{{ blog.title }}</h2>
+    <div class="tags">
+      <span class="tag status">{{ blog.isPublic ? 'Público' : 'Privado' }}</span>
+      <span *ngIf="blog.tags?.length" class="tag category">{{ blog.tags[0] }}</span>
+    </div>
+  </div>
+  
+  <div class="card-body">
+    <p class="summary">{{ blog.summary }}</p>
+  </div>
+  
+  <div class="card-footer">
+    <div class="meta">
+      <span class="author">{{ blog.author.name }}</span>
+      <span class="date">{{ blog.createdAt | date:'dd/MM/yyyy' }}</span>
+      <span class="views">{{ blog.views || 0 }} vistas</span>
+    </div>
+    
+    <div class="actions">
+      <div *ngIf="isAuthor" class="admin-buttons">
+        <a [routerLink]="['/blog', blog.id, 'edit']" class="edit-btn">Editar</a>
+        <button (click)="onDelete()" [disabled]="loading" class="delete-btn">Eliminar</button>
+      </div>
+      <a [routerLink]="['/blog', blog.id]" class="read-more">Leer más</a>
+    </div>
+  </div>
+</div>

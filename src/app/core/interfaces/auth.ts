@@ -1,3 +1,11 @@
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
 export interface LoginCredentials {
   email: string;
   password: string;
@@ -11,10 +19,8 @@ export interface RegisterCredentials {
 }
 
 export interface AuthResponse {
-  token: string;
-  user: {
-    id: string;
-    name: string;
-    email: string;
-  };
-} 
+  access_token: string;
+  user?: User;
+  timestamp?: string;
+  status?: number;
+}

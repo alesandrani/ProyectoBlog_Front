@@ -1,18 +1,21 @@
 export interface Blog {
-  id: string;
+  id: number;
   title: string;
   content: string;
   summary: string;
   isPublic: boolean;
   author: {
-    id: string;
+    id: number;
     name: string;
+    avatar?: string;
   };
-  userId: string;
+  userId: number;
   createdAt: string;
   updatedAt: string;
   tags: string[];
   imageUrl?: string;
+  category?: string;
+  views?: number;
 }
 
 export interface CreateBlogDto {

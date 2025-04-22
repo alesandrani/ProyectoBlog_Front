@@ -1,0 +1,30 @@
+.text-center {
+  .bg-gradient-to-r {
+    background-image: linear-gradient(to right, #4f46e5, #3b82f6);
+  }
+
+  .p-8 {
+    padding: 2rem;
+  }
+
+  .rounded-lg {
+    border-radius: 1rem;
+  }
+
+  .shadow-lg {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.125rem;
+    color: #4b5563;
+    margin-bottom: 1.5rem;
+  }
+}

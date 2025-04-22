@@ -1,0 +1,156 @@
+// Variables
+$primary-color: #2563eb; // Azul principal
+$hover-color: #1d4ed8; // Azul oscuro en hover
+$background-color: #ffffff; // Blanco para el fondo
+$border-color: #e5e7eb; // Color de borde suave
+$text-primary: #1f2937; // Texto principal
+$text-secondary: #6b7280; // Texto secundario
+$card-radius: 8px; // Radio de bordes para las tarjetas
+
+// Estilo principal de la tarjeta - Diseño minimalista
+.blog-card {
+  background-color: $background-color;
+  border: 1px solid $border-color;
+  border-radius: $card-radius;
+  padding: 1.25rem;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+  &:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    transform: translateY(-3px);
+  }
+
+  // Encabezado de la tarjeta
+  .card-header {
+    margin-bottom: 1rem;
+    
+    .title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: $text-primary;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    
+    .tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      
+      .tag {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.6rem;
+        border-radius: 999px;
+        font-weight: 500;
+        
+        &.status {
+          background-color: rgba($primary-color, 0.1);
+          color: $primary-color;
+        }
+        
+        &.category {
+          background-color: #f3f4f6;
+          color: $text-secondary;
+        }
+      }
+    }
+  }
+  
+  // Cuerpo de la tarjeta
+  .card-body {
+    flex: 1;
+    margin-bottom: 1rem;
+    
+    .summary {
+      color: $text-secondary;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+  }
+  
+  // Pie de la tarjeta
+  .card-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    border-top: 1px solid $border-color;
+    padding-top: 1rem;
+    margin-top: auto;
+    
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-size: 0.75rem;
+      color: $text-secondary;
+      
+      .author {
+        font-weight: 500;
+      }
+    }
+    
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      .admin-buttons {
+        display: flex;
+        gap: 0.5rem;
+        
+        .edit-btn, .delete-btn {
+          font-size: 0.75rem;
+          padding: 0.25rem 0.5rem;
+          border-radius: 4px;
+          border: none;
+          cursor: pointer;
+          font-weight: 500;
+          transition: background-color 0.2s;
+        }
+        
+        .edit-btn {
+          background-color: #f3f4f6;
+          color: $text-secondary;
+          text-decoration: none;
+          
+          &:hover {
+            background-color: darken(#f3f4f6, 5%);
+          }
+        }
+        
+        .delete-btn {
+          background-color: rgba(#ef4444, 0.1);
+          color: #ef4444;
+          
+          &:hover {
+            background-color: rgba(#ef4444, 0.2);
+          }
+          
+          &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+        }
+      }
+      
+      .read-more {
+        color: $primary-color;
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-weight: 500;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

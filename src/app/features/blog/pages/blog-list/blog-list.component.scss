@@ -1,0 +1,194 @@
+@use 'sass:color';
+
+// 🎨 Variables globales
+$primary: #1e3a8a;
+$accent: #f1f5f9;
+$text: #1f2937;
+$gray: #6b7280;
+
+// 🧱 Reset básico
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #fff;
+  color: $text;
+  line-height: 1.6;
+}
+
+// 🧭 Layout principal
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+// 🌈 Hero component
+.hero {
+  background: linear-gradient(to right, #1e3a8a, #4338ca);
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+
+  .title {
+    font-size: 2.25rem;
+    font-weight: 700;
+  }
+
+  .subtitle {
+    font-size: 1.125rem;
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+  }
+}
+
+// 📚 Contenido principal
+.toolbar {
+  margin-bottom: 1.5rem;
+
+  .search-input {
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    width: 100%;
+    max-width: 280px;
+    margin-bottom: 1rem;
+  }
+
+  .filters {
+    display: flex;
+    gap: 0.5rem;
+
+    .filter {
+      padding: 0.5rem 1rem;
+      border-radius: 99px;
+      border: 1px solid #d1d5db;
+      background: transparent;
+      cursor: pointer;
+
+      &:hover {
+        background: $accent;
+      }
+    }
+  }
+}
+
+.loader {
+  border: 4px solid $accent;
+  border-top: 4px solid $primary;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 2rem auto;
+  animation: spin 1s linear infinite;
+}
+
+.error-message {
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #b91c1c;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 1rem;
+
+  .btn-secondary {
+    padding: 0.5rem 1rem;
+    background: $primary;
+    color: white;
+    border-radius: 0.375rem;
+    text-decoration: none;
+
+    &:hover {
+      background: color.adjust($primary, $lightness: -10%);
+    }
+  }
+}
+
+.blog-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .blog-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    background: white;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transform: translateY(-4px);
+    }
+
+    img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .info {
+      padding: 1rem;
+
+      .meta {
+        font-size: 0.875rem;
+        color: $gray;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+      }
+
+      h2 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .summary {
+        font-size: 0.9rem;
+        color: $gray;
+        margin-bottom: 1rem;
+      }
+
+      .actions {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.875rem;
+        color: $primary;
+
+        a {
+          text-decoration: none;
+          font-weight: 500;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 🔁 Loader animation
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

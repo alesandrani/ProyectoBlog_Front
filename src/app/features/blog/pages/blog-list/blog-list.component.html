@@ -1,1 +1,33 @@
-<p>blog-list works!</p>
+<app-blog-hero></app-blog-hero>
+
+<div class="container">
+  <div class="toolbar">
+    <app-blog-search-filter
+      (searchChange)="onSearchChange($event)"
+      (filterChange)="onFilterChange($event)"
+    ></app-blog-search-filter>
+  </div>
+
+  <!-- Loader -->
+  <div *ngIf="loading" class="loader"></div>
+
+  <!-- Error -->
+  <div *ngIf="error" class="error-message">
+    <span>{{ error }}</span>
+    <button (click)="loadBlogs()">×</button>
+  </div>
+
+  <!-- Empty State -->
+  <app-blog-empty-state *ngIf="!loading && !error && filteredBlogs.length === 0"></app-blog-empty-state>
+
+  <!-- Blogs -->
+  <div *ngIf="!loading && !error && filteredBlogs.length > 0" class="blog-grid">
+    <app-blog-card
+      *ngFor="let blog of filteredBlogs"
+      [blog]="blog"
+      [isAuthor]="isAuthor(blog)"
+      [loading]="loading"
+      (delete)="deleteBlog($event)"
+    ></app-blog-card>
+  </div>
+</div>

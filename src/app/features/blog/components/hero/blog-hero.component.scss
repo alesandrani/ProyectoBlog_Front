@@ -1,0 +1,54 @@
+.hero-section {
+  background: linear-gradient(to right, #2563eb, #4f46e5); /* De azul a índigo */
+  color: white;
+  padding: 5rem 1rem; /* Espaciado mayor para que respire */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    
+    .max-w-3xl {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+
+      h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+      }
+
+      p {
+        font-size: 1.125rem;
+        opacity: 0.9;
+        margin-bottom: 2.5rem;
+      }
+
+      a {
+        display: inline-block;
+        padding: 0.75rem 2rem;
+        background-color: white;
+        color: #2563eb;
+        font-weight: 600;
+        border-radius: 9999px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+        &:hover {
+          background-color: #eff6ff; /* Suave cambio de fondo */
+          transform: translateY(-4px); /* Efecto hover */
+        }
+
+        svg {
+          width: 1.25rem;
+          height: 1.25rem;
+          margin-right: 0.5rem;
+        }
+      }
+    }
+  }
+}
