@@ -15,6 +15,9 @@ export class BlogCardComponent {
   @Input() isAuthor = false;
   @Input() loading = false;
   @Output() delete = new EventEmitter<number>();
+  
+  // Make Array available in the template
+  protected readonly Array = Array;
 
   onDelete() {
     this.delete.emit(this.blog.id);

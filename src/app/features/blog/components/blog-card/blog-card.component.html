@@ -3,7 +3,7 @@
     <h2 class="title">{{ blog.title }}</h2>
     <div class="tags">
       <span class="tag status">{{ blog.isPublic ? 'Público' : 'Privado' }}</span>
-      <span *ngIf="blog.tags?.length" class="tag category">{{ blog.tags[0] }}</span>
+      <span *ngIf="blog.tags && Array.isArray(blog.tags) && blog.tags.length > 0" class="tag category">{{ blog.tags[0] }}</span>
     </div>
   </div>
   

@@ -29,6 +29,8 @@ export class BlogFormComponent implements OnInit {
     this.blogForm = this.fb.group({
       title: ['', Validators.required],
       content: ['', Validators.required],
+      summary: ['', Validators.required],      
+      isPublic: [false, Validators.required],  
       tags: [''],
       imageUrl: ['']
     });

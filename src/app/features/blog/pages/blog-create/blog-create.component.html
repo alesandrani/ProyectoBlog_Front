@@ -21,6 +21,15 @@
       </div>
     </div>
 
+    <!-- Resumen -->
+    <div class="form-group mb-6">
+      <label for="summary" class="text-lg font-medium text-gray-700">Resumen</label>
+      <textarea id="summary" formControlName="summary" rows="4" class="form-input mt-2 p-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+      <div *ngIf="blogForm.get('summary')?.invalid && blogForm.get('summary')?.touched" class="error-message mt-2 text-red-500">
+        El resumen es requerido
+      </div>
+    </div>
+
     <!-- Etiquetas -->
     <div class="form-group mb-6">
       <label for="tags" class="text-lg font-medium text-gray-700">Etiquetas (separadas por comas)</label>
@@ -32,6 +41,12 @@
     <div class="form-group mb-6">
       <label for="imageUrl" class="text-lg font-medium text-gray-700">URL de la imagen (opcional)</label>
       <input id="imageUrl" type="url" formControlName="imageUrl" class="form-input mt-2 p-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <!-- Público -->
+    <div class="form-group mb-6 flex items-center">
+      <input id="isPublic" type="checkbox" formControlName="isPublic" class="mr-2 w-5 h-5 text-blue-500 focus:ring-blue-500 border-gray-300 rounded" />
+      <label for="isPublic" class="text-lg font-medium text-gray-700">¿Hacer este blog público?</label>
     </div>
 
     <!-- Acciones -->

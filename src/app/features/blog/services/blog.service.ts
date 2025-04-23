@@ -17,14 +17,23 @@ export class BlogService {
     return this.http.get<any>(this.apiUrl).pipe(
       map(response => {
         console.log('Raw API response:', response);
+        let blogs: Blog[] = [];
+        
         if (Array.isArray(response)) {
-          return response;
+          blogs = response;
         } else if (response && typeof response === 'object') {
           // If response is an object, try to extract an array from it
           const possibleArray = response.data || response.blogs || response.items || [];
-          return Array.isArray(possibleArray) ? possibleArray : [];
+          blogs = Array.isArray(possibleArray) ? possibleArray : [];
         }
-        return [];
+        
+        // Ensure tags is always an array for each blog
+        return blogs.map(blog => {
+          if (blog.tags && !Array.isArray(blog.tags)) {
+            blog.tags = Object.values(blog.tags);
+          }
+          return blog;
+        });
       }),
       catchError(error => {
         console.error('Error in getBlogs:', error);
@@ -37,13 +46,22 @@ export class BlogService {
     return this.http.get<any>(`${this.apiUrl}/public`).pipe(
       map(response => {
         console.log('Raw public blogs response:', response);
+        let blogs: Blog[] = [];
+        
         if (Array.isArray(response)) {
-          return response;
+          blogs = response;
         } else if (response && typeof response === 'object') {
           const possibleArray = response.data || response.blogs || response.items || [];
-          return Array.isArray(possibleArray) ? possibleArray : [];
+          blogs = Array.isArray(possibleArray) ? possibleArray : [];
         }
-        return [];
+        
+        // Ensure tags is always an array for each blog
+        return blogs.map(blog => {
+          if (blog.tags && !Array.isArray(blog.tags)) {
+            blog.tags = Object.values(blog.tags);
+          }
+          return blog;
+        });
       }),
       catchError(error => {
         console.error('Error in getPublicBlogs:', error);
@@ -53,15 +71,39 @@ export class BlogService {
   }
 
   getBlogById(id: number): Observable<Blog> {
-    return this.http.get<Blog>(`${this.apiUrl}/${id}`);
+    return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(
+      map(response => {
+        // Ensure tags is always an array
+        if (response && response.tags && !Array.isArray(response.tags)) {
+          response.tags = Object.values(response.tags);
+        }
+        return response;
+      })
+    );
   }
 
   createBlog(blog: CreateBlogDto): Observable<Blog> {
-    return this.http.post<Blog>(this.apiUrl, blog);
+    return this.http.post<any>(this.apiUrl, blog).pipe(
+      map(response => {
+        // Ensure tags is always an array
+        if (response && response.tags && !Array.isArray(response.tags)) {
+          response.tags = Object.values(response.tags);
+        }
+        return response;
+      })
+    );
   }
 
   updateBlog(id: number, blog: UpdateBlogDto): Observable<Blog> {
-    return this.http.patch<Blog>(`${this.apiUrl}/${id}`, blog);
+    return this.http.patch<any>(`${this.apiUrl}/${id}`, blog).pipe(
+      map(response => {
+        // Ensure tags is always an array
+        if (response && response.tags && !Array.isArray(response.tags)) {
+          response.tags = Object.values(response.tags);
+        }
+        return response;
+      })
+    );
   }
 
   deleteBlog(id: number): Observable<void> {
@@ -69,6 +111,30 @@ export class BlogService {
   }
 
   getMyBlogs(): Observable<Blog[]> {
-    return this.http.get<Blog[]>(`${this.apiUrl}/me`);
+    return this.http.get<any>(`${this.apiUrl}/me`).pipe(
+      map(response => {
+        console.log('Raw my blogs response:', response);
+        let blogs: Blog[] = [];
+        
+        if (Array.isArray(response)) {
+          blogs = response;
+        } else if (response && typeof response === 'object') {
+          const possibleArray = response.data || response.blogs || response.items || [];
+          blogs = Array.isArray(possibleArray) ? possibleArray : [];
+        }
+        
+        // Ensure tags is always an array for each blog
+        return blogs.map(blog => {
+          if (blog.tags && !Array.isArray(blog.tags)) {
+            blog.tags = Object.values(blog.tags);
+          }
+          return blog;
+        });
+      }),
+      catchError(error => {
+        console.error('Error in getMyBlogs:', error);
+        return of([]);
+      })
+    );
   }
 } 
