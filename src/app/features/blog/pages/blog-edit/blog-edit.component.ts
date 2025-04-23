@@ -49,18 +49,23 @@ export class BlogEditComponent implements OnInit {
   loadBlog() {
     this.blogService.getBlogById(this.blogId).subscribe({
       next: (blog) => {
-        this.blogForm.patchValue({
-          title: blog.title,
-          content: blog.content,
-          summary: blog.summary || '',
-          isPublic: blog.isPublic || true,
-          tags: blog.tags.join(', '),
-          imageUrl: blog.imageUrl || ''
-        });
+        if (blog) {
+          this.blogForm.patchValue({
+            title: blog.title,
+            content: blog.content,
+            summary: blog.summary || '',
+            isPublic: blog.isPublic === undefined ? true : blog.isPublic,
+            tags: Array.isArray(blog.tags) ? blog.tags.join(', ') : '',
+            imageUrl: blog.imageUrl || ''
+          });
+        } else {
+          console.error(`Blog with ID ${this.blogId} not found.`);
+          this.router.navigate(['/blogs']);
+        }
       },
       error: (error) => {
         console.error('Error al cargar el blog:', error);
-        this.router.navigate(['/blog']);
+        this.router.navigate(['/blogs']);
       }
     });
   }

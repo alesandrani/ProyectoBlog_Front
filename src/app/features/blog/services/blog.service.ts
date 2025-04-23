@@ -70,14 +70,41 @@ export class BlogService {
     );
   }
 
-  getBlogById(id: number): Observable<Blog> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(
+  getBlogById(id: number): Observable<Blog | null> {
+    // Expecting a response like { data: Blog, ... }
+    return this.http.get<{ data: Blog }>(`${this.apiUrl}/${id}`).pipe(
       map(response => {
-        // Ensure tags is always an array
-        if (response && response.tags && !Array.isArray(response.tags)) {
-          response.tags = Object.values(response.tags);
+        const blog = response.data; // Extract blog from data property
+        console.log('Blog data extracted in service:', JSON.stringify(blog, null, 2));
+
+        if (!blog) {
+          console.warn('No blog data found in response for ID:', id);
+          return null;
         }
-        return response;
+
+        // Ensure tags is always an array
+        if (blog.tags && !Array.isArray(blog.tags)) {
+          try {
+            blog.tags = Object.values(blog.tags);
+          } catch (e) {
+            console.warn('Could not convert tags to array:', blog.tags);
+            blog.tags = [];
+          }
+        } else if (!blog.tags) {
+          blog.tags = [];
+        }
+
+        // Check for author data WITHIN the extracted blog object
+        if (!blog.author) {
+           console.warn('Author data missing in blog object for ID:', blog.id);
+           // Template guard (*ngIf="blog.author") will handle this
+        }
+
+        return blog; // Return the extracted blog object
+      }),
+      catchError(error => {
+        console.error('Error fetching blog by ID:', id, error);
+        return of(null);
       })
     );
   }

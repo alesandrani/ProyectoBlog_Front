@@ -1,0 +1,74 @@
+<div class="blog-detail-container">
+  <!-- Loading state -->
+  <div *ngIf="loading" class="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="error" class="error">
+    <mat-icon>error</mat-icon>
+    <p>{{ error }}</p>
+  </div>
+
+  <!-- Blog content -->
+  <mat-card *ngIf="blog && !loading && !error" class="blog-card">
+    <!-- Encabezado del blog -->
+    <mat-card-header class="blog-header">
+      <mat-card-title>{{ blog.title }}</mat-card-title>
+      <!-- Solo muestra la info del autor si blog.author existe -->
+      <mat-card-subtitle *ngIf="blog.author">
+        <div class="author-info">
+          <img *ngIf="blog.author.avatar" [src]="blog.author.avatar" [alt]="blog.author.name" class="author-avatar">
+          <div class="author-details">
+            <span class="author">Por {{ blog.author.name || 'Anónimo' }}</span>
+            <span class="dot">•</span>
+            <span class="date">{{ blog.createdAt | date:'dd/MM/yyyy' }}</span>
+          </div>
+        </div>
+      </mat-card-subtitle>
+      <!-- Muestra un subtítulo alternativo si no hay autor -->
+      <mat-card-subtitle *ngIf="!blog.author">
+         <span class="date">{{ blog.createdAt | date:'dd/MM/yyyy' }}</span>
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <!-- Imagen del blog -->
+    <img *ngIf="blog.imageUrl" mat-card-image [src]="blog.imageUrl" [alt]="blog.title" class="blog-image" />
+
+    <mat-card-content class="blog-content">
+      <!-- Etiquetas y visibilidad -->
+      <div class="tags-section">
+        <mat-chip-listbox aria-label="Visibilidad y etiquetas">
+          <mat-chip [color]="blog.isPublic ? 'primary' : 'accent'" selected>
+            {{ blog.isPublic ? 'Público' : 'Privado' }}
+          </mat-chip>
+          <mat-chip *ngFor="let tag of blog.tags" color="primary" selected>
+            {{ tag }}
+          </mat-chip>
+        </mat-chip-listbox>
+      </div>
+
+      <mat-divider class="divider"></mat-divider>
+
+      <!-- Resumen y contenido -->
+      <div class="text-section">
+        <p class="summary" *ngIf="blog.summary">📝 {{ blog.summary }}</p>
+        <div class="main-content" [innerHTML]="blog.content"></div>
+      </div>
+
+      <!-- Estadísticas -->
+      <div class="stats">
+        <span><mat-icon>visibility</mat-icon> {{ blog.views || 0 }} vistas</span>
+        <span><mat-icon>schedule</mat-icon> Última actualización: {{ blog.updatedAt | date:'dd/MM/yyyy' }}</span>
+      </div>
+    </mat-card-content>
+
+    <!-- Acciones -->
+    <mat-card-actions class="card-actions">
+      <button mat-stroked-button color="warn" routerLink="/blogs">
+        <mat-icon>arrow_back</mat-icon>
+        Volver
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

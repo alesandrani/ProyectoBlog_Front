@@ -1,135 +1,141 @@
 .blog-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
   overflow: hidden;
   background-color: #fff;
   margin: 20px;
-  padding: 20px; /* Separación cómoda */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   transition: box-shadow 0.3s ease-in-out;
 }
 
 .blog-card:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16);
 }
 
 .card-header {
-  padding: 20px;
-  background-color: #f4f4f4;
-  border-bottom: 1px solid #ddd;
+  padding: 25px;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #eee;
 }
 
 .title {
-  font-size: 1.75rem;
-  margin: 0;
-  font-weight: bold;
+  font-size: 2rem;
+  margin: 0 0 10px 0;
+  font-weight: 600;
+  color: #333;
 }
 
 .tags {
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .tag {
-  font-size: 1rem;
-  padding: 6px 12px;
-  border-radius: 15px;
-  margin-right: 8px;
-  background-color: #f1f1f1;
+  font-size: 0.9rem;
+  padding: 7px 14px;
+  border-radius: 20px;
+  margin-right: 10px;
+  background-color: #e7e7e7;
+  color: #555;
 }
 
 .status {
-  background-color: #007bff;
+  background-color: #5cb85c;
   color: white;
 }
 
 .category {
-  background-color: #28a745;
+  background-color: #5bc0de;
   color: white;
 }
 
 .card-body {
-  padding: 20px;
+  padding: 25px;
 }
 
 .summary {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.6;
+  font-size: 1.05rem;
+  color: #444;
+  line-height: 1.7;
 }
 
 .card-footer {
-  padding: 15px 20px;
-  background-color: #f9f9f9;
-  border-top: 1px solid #ddd;
+  padding: 20px 25px;
+  background-color: #f8f8f8;
+  border-top: 1px solid #eee;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px; /* Espacio amplio entre los elementos */
+  gap: 25px;
 }
 
 .info {
   display: flex;
   align-items: center;
-  gap: 10px; /* ← Espacio entre autor, fecha y vistas */
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .info span {
-  font-size: 0.9rem;
-  color: #888;
+  font-size: 0.85rem;
+  color: #777;
 }
 
 .actions {
   display: flex;
   align-items: center;
-  gap: 10px; /* Espacio entre los botones */
+  gap: 12px; /* Ajusta este valor si es necesario */
 }
 
 .admin-buttons {
   display: flex;
-  gap: 15px; /* Más espacio entre los botones */
+  gap: 12px;
 }
 
 .edit-btn,
 .delete-btn,
 .read-more {
-  padding: 10px 13px; /* Botones más pequeños y elegantes */
+  display: inline-block;
+  padding: 10px 16px;
   font-size: 0.9rem;
   text-decoration: none;
-  border-radius: 25px; /* Redondeo más pronunciado */
+  border-radius: 25px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  border: 1px solid transparent;
+  min-width: 80px; /* Ajusta este valor según necesites */
+  text-align: center; /* Centra el texto dentro del botón */
 }
 
 .edit-btn {
   background-color: #007bff;
   color: white;
-  border: none;
 }
 
 .edit-btn:hover {
   background-color: #0056b3;
-  transform: scale(1.05);
+  transform: scale(1.03);
+  border-color: #0056b3;
 }
 
 .delete-btn {
   background-color: #dc3545;
   color: white;
-  border: none;
 }
 
 .delete-btn:hover {
   background-color: #c82333;
-  transform: scale(1.05);
+  transform: scale(1.03);
+  border-color: #c82333;
 }
 
 .read-more {
   background-color: #28a745;
   color: white;
-  border: none;
 }
 
 .read-more:hover {
   background-color: #218838;
-  transform: scale(1.05);
+  transform: scale(1.03);
+  border-color: #218838;
 }
