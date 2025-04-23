@@ -4,8 +4,11 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { RegisterComponent } from './features/auth/register/register.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { BlogListComponent } from './features/blog/pages/blog-list/blog-list.component';
-
+import { HomeComponent } from './pages/home/home.component';
 const routes: Routes = [
+  
+  { path: '', component: HomeComponent },
+  
   {
     path: 'login',
     component: LoginComponent
@@ -18,6 +21,11 @@ const routes: Routes = [
     path: 'blogs',
     component: BlogListComponent
 
+  },
+  {
+    path: 'post/edit/:id',
+    loadComponent: () =>
+      import('./features/blog/pages/blog-edit/blog-edit.component').then(m => m.BlogEditComponent)
   },
   {
     path: 'post',

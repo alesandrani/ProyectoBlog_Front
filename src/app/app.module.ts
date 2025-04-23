@@ -1,28 +1,22 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { AppComponent } from './app.component';
-import { BlogFormComponent } from './features/blog/pages/blog-form/blog-form.component';
+import { HomeComponent } from './pages/home/home.component';
 
-/**
- * Note: This project is using a hybrid approach with both NgModule and standalone components.
- * 
- * For HTTP interceptors:
- * - Functional interceptors are registered in app.config.ts using provideHttpClient(withInterceptors([...]))
- * - Do not register interceptors here to avoid duplicates
- */
 @NgModule({
-  declarations: [
-  ],
+  declarations: [AppComponent, HomeComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule,
-    BlogFormComponent
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule
   ],
-  providers: []
+  providers: [],
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,0 +1,36 @@
+// src/app/home/home.component.scss
+.container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .auth-buttons {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .blog-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  mat-card-content {
+    flex-grow: 1;
+  }
+  
+  

@@ -1,29 +1,38 @@
-<div class="blog-card">
-  <div class="card-header">
+<article class="blog-card">
+  <header class="card-header">
     <h2 class="title">{{ blog.title }}</h2>
     <div class="tags">
-      <span class="tag status">{{ blog.isPublic ? 'Público' : 'Privado' }}</span>
-      <span *ngIf="blog.tags && Array.isArray(blog.tags) && blog.tags.length > 0" class="tag category">{{ blog.tags[0] }}</span>
+      <span class="tag" [ngClass]="{'status': blog.isPublic}" [attr.aria-label]="blog.isPublic ? 'Artículo público' : 'Artículo privado'">{{ blog.isPublic ? 'Público' : 'Privado' }}</span>
+      <span *ngIf="blog.tags && blog.tags.length > 0" class="tag category">{{ blog.tags[0] }}</span>
+      <ng-container *ngIf="blog.tags && blog.tags.length > 1">
+        <span *ngFor="let tag of blog.tags | slice:1" class="tag">{{ tag }}</span>
+      </ng-container>
     </div>
-  </div>
-  
+  </header>
+
   <div class="card-body">
     <p class="summary">{{ blog.summary }}</p>
   </div>
-  
-  <div class="card-footer">
-    <div class="meta">
-      <span class="author">{{ blog.author.name }}</span>
-      <span class="date">{{ blog.createdAt | date:'dd/MM/yyyy' }}</span>
-      <span class="views">{{ blog.views || 0 }} vistas</span>
+
+  <footer class="card-footer">
+    <div class="info">
+      <span class="author"><i class="fas fa-user"></i> {{ blog.author?.name }}</span>
+      <span class="date"><i class="far fa-calendar-alt"></i> {{ blog.createdAt | date:'dd/MM/yyyy' }}</span>
+      <span class="views"><i class="far fa-eye"></i> {{ blog.views || 0 }} vistas</span>
     </div>
-    
+
     <div class="actions">
       <div *ngIf="isAuthor" class="admin-buttons">
-        <a [routerLink]="['/blog', blog.id, 'edit']" class="edit-btn">Editar</a>
-        <button (click)="onDelete()" [disabled]="loading" class="delete-btn">Eliminar</button>
+        <a [routerLink]="['/blogs', blog.id, 'edit']" class="edit-btn" [attr.aria-label]="'Editar artículo'">
+          <i class="fas fa-edit"></i> Editar
+        </a>
+        <button (click)="onDelete()" [disabled]="loading" class="delete-btn" [attr.aria-label]="'Eliminar artículo'">
+          <i class="fas fa-trash-alt"></i> Eliminar
+        </button>
       </div>
-      <a [routerLink]="['/blog', blog.id]" class="read-more">Leer más</a>
+      <a [routerLink]="['/blog/', blog.id]" class="read-more" [attr.aria-label]="'Leer más sobre ' + blog.title">
+        <i class="fas fa-arrow-right"></i> Leer más
+      </a>
     </div>
-  </div>
-</div>
+  </footer>
+</article>

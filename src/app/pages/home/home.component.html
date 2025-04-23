@@ -1,0 +1,31 @@
+<!-- src/app/home/home.component.html -->
+<div class="container">
+    <div class="header">
+      <h1>Blogs Públicos</h1>
+      <div class="auth-buttons">
+        <a mat-raised-button color="primary" routerLink="/auth/login">Iniciar Sesión</a>
+        <a mat-raised-button color="accent" routerLink="/auth/register">Registrarse</a>
+      </div>
+    </div>
+  
+    <div class="blog-grid">
+      <mat-card *ngFor="let blog of blogs" class="blog-card">
+        <mat-card-header>
+          <mat-card-title>{{ blog.title }}</mat-card-title>
+          <mat-card-subtitle>Por {{ blog.author }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ blog.summary }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="navigateToBlog(blog.id)">
+            Leer más
+          </button>
+          <button mat-button color="accent" (click)="navigateToEdit(blog.id)">
+            Editar
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  

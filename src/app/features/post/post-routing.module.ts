@@ -8,10 +8,18 @@ const routes: Routes = [
   { path: '', component: PostListComponent },
   { path: 'detail/:id', component: PostDetailComponent },
   { path: 'create', component: PostFormComponent },
+  { path: 'blogs', component: PostListComponent },
+  { path: 'edit/:id', component: PostFormComponent },
+  
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    RouterModule.forChild(routes),
+    PostListComponent,
+    PostDetailComponent,
+    PostFormComponent
+  ],
   exports: [RouterModule]
 })
 export class PostRoutingModule {}

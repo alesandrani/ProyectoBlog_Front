@@ -13,6 +13,7 @@ const routes: Routes = [
     component: BlogListComponent,
     canActivate: [AuthGuard]
   },
+  
   {
     path: 'public',
     component: PublicBlogsComponent
@@ -23,9 +24,9 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: ':id/edit',
-    component: BlogEditComponent,
-    canActivate: [AuthGuard]
+    path: 'post/edit/:id',
+    loadComponent: () =>
+      import('./pages/blog-edit/blog-edit.component').then(m => m.BlogEditComponent)
   },
   {
     path: ':id',
