@@ -40,7 +40,9 @@ export class HomeComponent implements OnInit {
   }
 
   navigateToEdit(id: number): void {
-    this.router.navigate(['/blogs', id, 'edit']);
+    this.router.navigate(['/blogs', id, 'edit']).then(() => {
+      this.loadPublicBlogs();
+    });
   }
 
   private loadPublicBlogs(): void {

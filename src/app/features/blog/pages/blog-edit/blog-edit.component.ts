@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -13,6 +13,7 @@ import { Blog, UpdateBlogDto } from '@app/core/interfaces/blog';
   styleUrls: ['blog-edit.component.scss']    // Aquí conectas tu archivo SCSS
 })
 export class BlogEditComponent implements OnInit {
+  @Output() blogUpdated = new EventEmitter<void>();
   blogForm: FormGroup;
   blogId: number = 0;
 
@@ -25,6 +26,8 @@ export class BlogEditComponent implements OnInit {
     this.blogForm = this.fb.group({
       title: ['', Validators.required],
       content: ['', Validators.required],
+      summary: [''],
+      isPublic: [true],
       tags: [''],
       imageUrl: ['']
     });
@@ -49,6 +52,8 @@ export class BlogEditComponent implements OnInit {
         this.blogForm.patchValue({
           title: blog.title,
           content: blog.content,
+          summary: blog.summary || '',
+          isPublic: blog.isPublic || true,
           tags: blog.tags.join(', '),
           imageUrl: blog.imageUrl || ''
         });
@@ -63,13 +68,18 @@ export class BlogEditComponent implements OnInit {
   onSubmit() {
     if (this.blogForm.valid) {
       const blogData: UpdateBlogDto = {
-        ...this.blogForm.value,
-        tags: this.blogForm.value.tags.split(',').map((tag: string) => tag.trim()).filter(Boolean)
+        title: this.blogForm.value.title,
+        content: this.blogForm.value.content,
+        summary: this.blogForm.value.summary || '',
+        isPublic: this.blogForm.value.isPublic || true,
+        tags: this.blogForm.value.tags.split(',').map((tag: string) => tag.trim()).filter(Boolean),
+        imageUrl: this.blogForm.value.imageUrl || ''
       };
 
       this.blogService.updateBlog(this.blogId, blogData).subscribe({
         next: () => {
-          this.router.navigate(['/blog', this.blogId]); 
+          this.blogUpdated.emit();
+          this.router.navigate(['/blogs', this.blogId]); 
         },
         error: (error) => {
           console.error('Error al actualizar el blog:', error);
